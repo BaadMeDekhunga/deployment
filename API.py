@@ -36,7 +36,7 @@ def data():
         testkeandartable=db["my_record"]
         
         data={"Entered Username":entered_email,
-              "Entered Password":enteredd_password}
+              "Entered Password":entered_password}
         testkeandartable.insert_one(data)
         
         # Redirect the user to a different website after form submission
